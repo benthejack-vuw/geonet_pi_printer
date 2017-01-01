@@ -22,7 +22,6 @@ class EarthquakeData
 		args.each do |param|
 			output << "#{param}: #{self.send param}\n" if self.respond_to? param
 		end
-
 		output
 	end
 
