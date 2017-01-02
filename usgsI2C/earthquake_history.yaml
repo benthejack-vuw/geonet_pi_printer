@@ -1,0 +1,39 @@
+---
+us10007nrl: !ruby/object:USGSParser
+  data:
+    type: Feature
+    properties:
+      mag: 5.4
+      place: 141km NE of L'Esperance Rock, New Zealand
+      time: 1483102573690
+      updated: 1483105725040
+      tz: -720
+      url: http://earthquake.usgs.gov/earthquakes/eventpage/us10007nrl
+      detail: http://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10007nrl&format=geojson
+      felt: 
+      cdi: 
+      mmi: 
+      alert: 
+      status: reviewed
+      tsunami: 0
+      sig: 449
+      net: us
+      code: 10007nrl
+      ids: ",us10007nrl,"
+      sources: ",us,"
+      types: ",geoserve,origin,phase-data,"
+      nst: 
+      dmin: 7.669
+      rms: 0.96
+      gap: 59
+      magType: mb
+      type: earthquake
+      title: M 5.4 - 141km NE of L'Esperance Rock, New Zealand
+    geometry:
+      type: Point
+      coordinates:
+      - -177.7777
+      - -30.5957
+      - 25.12
+    id: us10007nrl
+  date_time: !ruby/object:DateTime 2016-12-31 01:56:13.000000000 +13:00
