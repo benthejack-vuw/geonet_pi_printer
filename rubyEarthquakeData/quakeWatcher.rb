@@ -5,16 +5,26 @@ require 'open-uri'
 
 class QuakeWatcher
 
-	def initialize 
-		@quake_history = Store.new("./earthquake_history.yaml");
+	@@watchers ||= []
+
+	def initialize id, persist 
+		@quake_history = Store.new( "./earthquake_history_#{id}.yaml", persist );
 	end
 
 	def watch api_url, delay, parser_class, &callback
-		1.upto(Float::INFINITY) do |n|
-		  sleep delay
-		  quake = newest_unseen_quake(api_url, parser_class)
-		  callback.call(quake) if quake
+		
+		t = Thread.new do
+			1.upto(Float::INFINITY) do |n|
+		  		quake = newest_unseen_quake(api_url, parser_class)
+		  		callback.call(quake) if quake
+				sleep delay
+			end
 		end
+		@@watchers.push t
+	end
+	
+	def self.wait
+		@@watchers.each { |t| t.join }
 	end
 
 	def load_quakes api_url, parser_class
@@ -45,14 +55,11 @@ class QuakeWatcher
 
 		unless @quake_history.contains? most_recent
 			@quake_history.add_item most_recent
-			@quake_history.save
 			return most_recent
 		else
 			return nil
 		end
 			
 	end
-
-	
 
 end

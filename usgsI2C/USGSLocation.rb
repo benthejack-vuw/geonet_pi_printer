@@ -13,8 +13,8 @@ class USGSLocation
 
 	def initialize latitude, longitude, radius, i2cAddress
 		url = "#{USGS_URL}?format=geojson&latitude=#{latitude}&longitude=#{longitude}&maxradiuskm=#{radius}"
-		watcher = QuakeWatcher.new
-		watcher.watch(url, 10, USGSParser) do |quake|
+		watcher = QuakeWatcher.new i2cAddress, false
+		watcher.watch(url, 60, USGSParser) do |quake|
 		 	puts "#{quake.selective_print :time, :location, :magnitude, :mmi}\n"
 		 	SEND.call(i2cAddress, quake.magnitude)
 		end
